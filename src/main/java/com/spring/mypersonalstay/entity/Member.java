@@ -1,5 +1,9 @@
 package com.spring.mypersonalstay.entity;
 
+import java.time.LocalDateTime;
+
+import org.hibernate.annotations.CreationTimestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -21,6 +25,12 @@ public class Member {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long memberId;
 	
+	@Column(length = 30)
+	private String email;
+	
+	@Column(length = 20)
+	private String password;
+	
 	@Column(length = 100)
 	private String name;
 	
@@ -39,16 +49,19 @@ public class Member {
 	private String favorite;
 	
 	@Column(length = 20)
-	private String alcohol_limit;
+	private String alcoholLimit;
 	
 	@Column(length = 100)
-	private String img_url;
+	private String imgUrl;
+	
+	@CreationTimestamp
+	private LocalDateTime regDate;
 
 	@Override
 	public String toString() {
-		return "Member [memberId=" + memberId + ", name=" + name + ", age=" + age + ", sex=" + sex + ", mbti=" + mbti
-				+ ", introduce=" + introduce + ", favorite=" + favorite + ", alcohol_limit=" + alcohol_limit
-				+ ", img_url=" + img_url + "]";
+		return "Member [memberId=" + memberId + ", email=" + email + ", password=" + password + ", name=" + name
+				+ ", age=" + age + ", sex=" + sex + ", mbti=" + mbti + ", introduce=" + introduce + ", favorite="
+				+ favorite + ", alcoholLimit=" + alcoholLimit + ", imgUrl=" + imgUrl + ", regDate=" + regDate + "]";
 	}
-	
+
 }

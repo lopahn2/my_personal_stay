@@ -35,5 +35,5 @@ public class Status {
 	private LocalDateTime regDate;
 	
 	private Member member;
-	private GuestHoust guestHouse;
+	private GuestHouse guestHouse;
 }
