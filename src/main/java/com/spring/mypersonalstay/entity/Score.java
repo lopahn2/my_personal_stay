@@ -31,7 +31,5 @@ public class Score {
 	@Column(name = "totalScore")
 	private Float totalScore;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "guest_house_id")
-	private GuestHouse guesthouse;
+	
 }
