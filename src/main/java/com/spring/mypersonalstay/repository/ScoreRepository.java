@@ -7,5 +7,6 @@ import com.spring.mypersonalstay.entity.Score;
 
 @Repository
 public interface ScoreRepository extends JpaRepository<Score, Long>{
+	
 
 }
