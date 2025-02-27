@@ -1,5 +1,6 @@
 package com.spring.mypersonalstay.entity;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -21,13 +22,12 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-@Data
 public class GuestHouse {
 
 	@Id
-	@Column(name = "guesthouse_id")
+	@Column(name = "guest_house_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long guest_house_id;
+	private Long guestHouseId;
 	
 	@Column(length=100)
 	private String name;
@@ -44,18 +44,23 @@ public class GuestHouse {
 	private String tags;
 	
 	@Lob
-	private String bg_img_url;
+	@Column(name = "bg_img_url")
+	private String bgImgUrl;
 	
 	@Lob
-	private String host_img_url;
+	@Column(name = "host_img_url")
+	private String hostImgUrl;
 	
 	@CreationTimestamp
 	private LocalDateTime regDate;
 
 	@Override
 	public String toString() {
-		return "GuestHouse [guest_house_id=" + guest_house_id + ", name=" + name + ", location=" + location
-				+ ", capacity=" + capacity + ", description=" + description + ", regDate=" + regDate + "]";
+		return "GuestHouse [guestHouseId=" + guestHouseId + ", name=" + name + ", location=" + location + ", capacity="
+				+ capacity + ", description=" + description + ", tags=" + tags + ", bgImgUrl=" + bgImgUrl
+				+ ", hostImgUrl=" + hostImgUrl + ", regDate=" + regDate + "]";
 	}
+
+	
 	
 }
