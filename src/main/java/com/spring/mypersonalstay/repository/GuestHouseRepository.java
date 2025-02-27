@@ -16,6 +16,8 @@ public interface GuestHouseRepository extends JpaRepository<GuestHouse, Long> {
 	List<GuestHouse> findByTagsContains(String tag);
 
 	List<GuestHouse> findByCapacityBetween(Integer min, Integer max);
+	
+	Optional<GuestHouse> findById(Long guestHouseid);
 
 	// 모든 게스트 하우스 점수 보여주기
 	@Query(value = "SELECT gh FROM GuestHouse gh JOIN FETCH gh.scores")
