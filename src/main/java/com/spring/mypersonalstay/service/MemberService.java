@@ -26,9 +26,21 @@ public class MemberService {
 		if (!member.getPassword().equals(reqSignInDto.getPassword())) throw new CustomException(StatusCode.INVALID_PASSWORD);
 		
 		return JWT.create()
-				.withSubject(String.valueOf(member.getMemberId()))
-				.withIssuedAt(new Date())
-				.withExpiresAt(new Date(System.currentTimeMillis() + EXPIRED_TIME))
-				.sign(Algorithm.HMAC256(SECRET_KEY));
+		        .withClaim("memberId", member.getMemberId())
+		        .withClaim("email", member.getEmail())
+		        .withClaim("name", member.getName())
+		        .withClaim("age", member.getAge())
+		        .withClaim("sex", member.getSex())
+		        .withClaim("mbti", member.getMbti())
+		        .withClaim("introduce", member.getIntroduce())
+		        .withClaim("favorite", member.getFavorite())
+		        .withClaim("alcoholLimit", member.getAlcoholLimit())
+		        .withClaim("imgUrl", member.getImgUrl())
+		        .withIssuedAt(new Date())
+		        .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRED_TIME))
+		        .sign(Algorithm.HMAC256(SECRET_KEY));
+
 	}
+	
+	
 }

@@ -37,6 +37,10 @@ public class ScoreService {
 		return tags.stream().filter((t) -> mbti.equals(t)).toList().size();
 	}
 	
+	public void run() {
+		scoreRepository.findAll().forEach(s -> System.out.println(s));
+	}
+	
 	@Transactional
 	public ScoreRes findScore(Long id) throws Exception{
 		Score rScore = scoreRepository.findById(id)
