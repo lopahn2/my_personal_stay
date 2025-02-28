@@ -7,8 +7,6 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.spring.jpa.repository.BoardRepository;
-import com.spring.jpa.repository.CustomRepository;
 import com.spring.mypersonalstay.dto.ScoreReq;
 import com.spring.mypersonalstay.dto.ScoreRes;
 import com.spring.mypersonalstay.entity.GuestHouse;
