@@ -5,7 +5,12 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.spring.mypersonalstay.dto.tag.TagIdSearchRequestDTO;
+import com.spring.mypersonalstay.dto.tag.TagMFieldSearchRequestDTO;
+import com.spring.mypersonalstay.dto.tag.TagNameSearchRequestDTO;
 import com.spring.mypersonalstay.entity.Tag;
+import com.spring.mypersonalstay.handler.CustomException;
+import com.spring.mypersonalstay.handler.StatusCode;
 import com.spring.mypersonalstay.repository.TagRepository;
 
 import jakarta.transaction.Transactional;
@@ -14,46 +19,33 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class TagService {
-//	private final TagRepository tagRepository;
-//	
-//	@Transactional
-//	private List<Tag> getAllTags() {
-//		List<Tag> res = tagRepository.findAll();
-//		return res;
-//	}	
-//	
-//	@Transactional
-//	private Optional<Tag> getTagById(Integer id) {
-//		Optional<Tag> res = tagRepository.findById(id);
-//		if (res.isPresent()) return res;
-//		return null;
-//	}	
-//	
-//	@Transactional
-//	private List<Tag> getTagByName(String name) {
-//		List<Tag> res = tagRepository.findByNameContains(name);
-//		return res;
-//	}	
-//	
-//	@Transactional
-//	private List<Tag> getTagByMField(String mField) {
-//		List<Tag> res = tagRepository.findByNameContains(mField);
-//		return res;
-//	}
-//	
-//	@Transactional
-//	private void addTag(String name, String mField) {
-//		
-//	}	
-//	
-//	@Transactional
-//	private void deleteTag(Integer id) {
-//		
-//	}	
-//	
-//	@Transactional
-//	private void updateTag(Integer id, String name, String mField) {
-//		
-//	}
+
+	private final TagRepository tagRepository;
+	
+	@Transactional
+	private List<Tag> getAllTags() {
+		List<Tag> res = tagRepository.findAll();
+		return res;
+	}	
+	
+	@Transactional
+	private Tag getTagById(TagIdSearchRequestDTO req) {
+		Tag res = tagRepository.findByTagId(req.getId()).orElseThrow(() -> new CustomException(StatusCode.NOT_FOUND));
+		return res;
+	}	
+	
+	@Transactional
+	private List<Tag> getTagByName(TagNameSearchRequestDTO req) {
+		List<Tag> res = tagRepository.findByTagNameContains(req.getTagName());
+		return res;
+	}	
+	
+	@Transactional
+	private List<Tag> getTagByMField(TagMFieldSearchRequestDTO req) {
+		List<Tag> res = tagRepository.findBymFieldContains(req.getMField());
+		return res;
+	}
+
+
 	
 }
