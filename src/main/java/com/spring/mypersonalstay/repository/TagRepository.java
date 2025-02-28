@@ -10,9 +10,9 @@ import com.spring.mypersonalstay.entity.Tag;
 
 @Repository
 public interface TagRepository extends JpaRepository<Tag, Long>{
-	List<Tag> findAll();
-
-	Optional<Tag> findById(Integer id);
-
-	List<Tag> findByNameContains(String name);
+//	List<Tag> findAll();
+//
+//	Optional<Tag> findById(Integer id);
+//
+//	List<Tag> findByNameContains(String name);
 }

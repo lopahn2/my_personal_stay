@@ -14,27 +14,27 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class TagService {
-	private final TagRepository tagRepository;
-	
-	@Transactional
-	private List<Tag> getAllTags() {
-		List<Tag> res = tagRepository.findAll();
-		return res;
-	}	
-	
-	@Transactional
-	private Optional<Tag> getTagById(Integer id) {
-		Optional<Tag> res = tagRepository.findById(id);
-		if (res.isPresent()) return res;
-		return null;
-	}	
-	
-	@Transactional
-	private List<Tag> getTagByName(String name) {
-		List<Tag> res = tagRepository.findByNameContains(name);
-		return res;
-	}	
-	
+//	private final TagRepository tagRepository;
+//	
+//	@Transactional
+//	private List<Tag> getAllTags() {
+//		List<Tag> res = tagRepository.findAll();
+//		return res;
+//	}	
+//	
+//	@Transactional
+//	private Optional<Tag> getTagById(Integer id) {
+//		Optional<Tag> res = tagRepository.findById(id);
+//		if (res.isPresent()) return res;
+//		return null;
+//	}	
+//	
+//	@Transactional
+//	private List<Tag> getTagByName(String name) {
+//		List<Tag> res = tagRepository.findByNameContains(name);
+//		return res;
+//	}	
+//	
 //	@Transactional
 //	private List<Tag> getTagByMField(String mField) {
 //		List<Tag> res = tagRepository.findByNameContains(mField);
