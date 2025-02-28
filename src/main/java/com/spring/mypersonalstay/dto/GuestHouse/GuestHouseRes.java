@@ -1,4 +1,4 @@
-package com.spring.mypersonalstay.dto.GuestHouse;
+package com.spring.mypersonalstay.dto.guestHouse;
 
 import java.util.List;
 

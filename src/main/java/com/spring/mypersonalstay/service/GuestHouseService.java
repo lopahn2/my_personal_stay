@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 
-import com.spring.mypersonalstay.dto.GuestHouse.GuestHouseRes;
+import com.spring.mypersonalstay.dto.guestHouse.GuestHouseRes;
 import com.spring.mypersonalstay.entity.GuestHouse;
 import com.spring.mypersonalstay.handler.CustomException;
 import com.spring.mypersonalstay.handler.StatusCode;
