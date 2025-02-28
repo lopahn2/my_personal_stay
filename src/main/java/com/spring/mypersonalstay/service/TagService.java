@@ -9,6 +9,8 @@ import com.spring.mypersonalstay.dto.tag.TagIdSearchRequestDTO;
 import com.spring.mypersonalstay.dto.tag.TagMFieldSearchRequestDTO;
 import com.spring.mypersonalstay.dto.tag.TagNameSearchRequestDTO;
 import com.spring.mypersonalstay.entity.Tag;
+import com.spring.mypersonalstay.handler.CustomException;
+import com.spring.mypersonalstay.handler.StatusCode;
 import com.spring.mypersonalstay.repository.TagRepository;
 
 import jakarta.transaction.Transactional;
@@ -26,10 +28,9 @@ public class TagService {
 	}	
 	
 	@Transactional
-	private Optional<Tag> getTagById(TagIdSearchRequestDTO req) {
-		Optional<Tag> res = tagRepository.findByTagId(req.getId());
-		if (res.isPresent()) return res;
-		return null;
+	private Tag getTagById(TagIdSearchRequestDTO req) {
+		Tag res = tagRepository.findByTagId(req.getId()).orElseThrow(() -> new CustomException(StatusCode.NOT_FOUND));
+		return res;
 	}	
 	
 	@Transactional
