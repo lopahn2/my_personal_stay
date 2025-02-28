@@ -5,6 +5,9 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.spring.mypersonalstay.dto.tag.TagIdSearchRequestDTO;
+import com.spring.mypersonalstay.dto.tag.TagMFieldSearchRequestDTO;
+import com.spring.mypersonalstay.dto.tag.TagNameSearchRequestDTO;
 import com.spring.mypersonalstay.entity.Tag;
 import com.spring.mypersonalstay.repository.TagRepository;
 
@@ -23,24 +26,24 @@ public class TagService {
 	}	
 	
 	@Transactional
-	private Optional<Tag> getTagById(Integer id) {
-		Optional<Tag> res = tagRepository.findById(id);
+	private Optional<Tag> getTagById(TagIdSearchRequestDTO req) {
+		Optional<Tag> res = tagRepository.findByTagId(req.getId());
 		if (res.isPresent()) return res;
 		return null;
 	}	
 	
 	@Transactional
-	private List<Tag> getTagByName(String name) {
-		List<Tag> res = tagRepository.findByNameContains(name);
+	private List<Tag> getTagByName(TagNameSearchRequestDTO req) {
+		List<Tag> res = tagRepository.findByTagNameContains(req.getTagName());
 		return res;
 	}	
 	
-//	@Transactional
-//	private List<Tag> getTagByMField(String mField) {
-//		List<Tag> res = tagRepository.findByNameContains(mField);
-//		return res;
-//	}
-//	
+	@Transactional
+	private List<Tag> getTagByMField(TagMFieldSearchRequestDTO req) {
+		List<Tag> res = tagRepository.findBymFieldContains(req.getMField());
+		return res;
+	}
+
 //	@Transactional
 //	private void addTag(String name, String mField) {
 //		
