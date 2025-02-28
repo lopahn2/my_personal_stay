@@ -31,5 +31,4 @@ public class Score {
 	@Column(name = "totalScore")
 	private Float totalScore;
 	
-	
 }

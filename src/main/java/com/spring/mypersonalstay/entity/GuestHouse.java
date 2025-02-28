@@ -13,7 +13,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
@@ -59,8 +61,8 @@ public class GuestHouse {
 	@CreationTimestamp
 	private LocalDateTime regDate;
 	
-	@OneToMany(fetch = FetchType.LAZY)
-	@JoinColumn(name = "score_id")
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "guest_house_score", joinColumns = @JoinColumn(name = "guest_house_id"), inverseJoinColumns = @JoinColumn(name = "score_id"))
 	private List<Score> scores;
 
 	@Override

@@ -13,7 +13,7 @@ public interface StatusRepository extends JpaRepository<Status, Long> {
 	List<Status> findByGuestHouse(GuestHouse guestHouse);
 	List<Status> findByMemberAndGuestHouse(Member member, GuestHouse guestHouse);
 	List<Status> findByMemberAndIsLiked(Member member, Boolean isLiked);
-	List<Status> findByMemberAndisBooked(Member member, Boolean isBooked);
+	List<Status> findByMemberAndIsBooked(Member member, Boolean isBooked);
 	
 	
 }
