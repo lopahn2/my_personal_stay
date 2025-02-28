@@ -4,11 +4,10 @@ import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
-import com.spring.jpa.repository.BoardRepository;
-import com.spring.jpa.repository.CustomRepository;
 import com.spring.mypersonalstay.dto.ScoreReq;
 import com.spring.mypersonalstay.dto.ScoreRes;
 import com.spring.mypersonalstay.entity.GuestHouse;
@@ -26,7 +25,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ScoreService {
 	private final ScoreRepository scoreRepository;
-	private final GuestHouseRepository guesetHouseRepository;
+	private final GuestHouseRepository guestHouseRepository;
 	private final StatusRepository statusRepository;
 	
 	
@@ -49,8 +48,13 @@ public class ScoreService {
 	
 	@Transactional
 	public ScoreRes updateScore(ScoreReq scoreReq) throws Exception {
-		Score rScore = scoreRepository.findByGuestHouseIdAndMbti(scoreReq.getGuestHouseId(), scoreReq.getMbti()).get();	
-		GuestHouse guestHouse = guesetHouseRepository.findById(scoreReq.getGuestHouseId()).get();
+		Score rScore = (Score) guestHouseRepository.findById(scoreReq.getGuestHouseId())
+				.get()
+				.getScores()
+				.stream()
+				.filter(s -> s.getMbti().equals(scoreReq.getMbti()));
+		
+		GuestHouse guestHouse = guestHouseRepository.findById(scoreReq.getGuestHouseId()).get();
 		List<Status> rStatusList = statusRepository.findByGuestHouse(guestHouse);
 		int tmpScore = rStatusList.stream().filter((t) -> 
 				t.getMember()
@@ -65,8 +69,13 @@ public class ScoreService {
 	
 	@Transactional
 	public ScoreRes initScore(ScoreReq scoreReq) throws Exception {
-		Score rScore = scoreRepository.findByGuestHouseIdAndMbti(scoreReq.getGuestHouseId(), scoreReq.getMbti()).get();
-		String mbti = guesetHouseRepository
+		Score rScore = (Score) guestHouseRepository.findById(scoreReq.getGuestHouseId())
+			.get()
+			.getScores()
+			.stream()
+			.filter(s -> s.getMbti().equals(scoreReq.getMbti()));
+			
+		String mbti = guestHouseRepository
 				.findById(scoreReq.getGuestHouseId())
 				.get()
 				.getTags();
