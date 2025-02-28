@@ -10,6 +10,7 @@ import com.spring.mypersonalstay.entity.Tag;
 
 @Repository
 public interface TagRepository extends JpaRepository<Tag, Long>{
+
 	List<Tag> findAll();
 
 	List<Tag> findByTagNameContains(String name);
