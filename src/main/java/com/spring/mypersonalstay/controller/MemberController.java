@@ -22,13 +22,13 @@ public class MemberController {
 	private static final String BEARER_PREFIX = "Bearer ";
 	
 	// 로그인
-	@PostMapping("/login")
+	@PostMapping("/member/login")
 	public ResponseEntity<?> login(@RequestBody ReqSignInDto req) throws Exception {
 		return new ResponseEntity<>(memberService.getToken(req), HttpStatus.OK);
 	}
 	
 	// 회원정보 가져오기
-	@GetMapping("/memberInfo")
+	@GetMapping("/member/info")
 	public ResponseEntity<?> getMember(HttpServletRequest request) {
 		String bearerToken = request.getHeader(AUTHORIZATION_HEADER);
 		String token = "";
