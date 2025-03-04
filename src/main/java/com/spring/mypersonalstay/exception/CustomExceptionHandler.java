@@ -1,13 +1,14 @@
-package com.spring.mypersonalstay.handler;
+package com.spring.mypersonalstay.exception;
 
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import ch.qos.logback.classic.Logger;
 
-@ControllerAdvice
+@RestControllerAdvice
 public class CustomExceptionHandler {
 
 	@ExceptionHandler(CustomException.class)

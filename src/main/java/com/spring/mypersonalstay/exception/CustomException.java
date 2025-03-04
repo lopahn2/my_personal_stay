@@ -1,4 +1,4 @@
-package com.spring.mypersonalstay.handler;
+package com.spring.mypersonalstay.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,7 +15,6 @@ public class CustomException extends RuntimeException {
     private StatusCode authCode;
 
     public CustomException(StatusCode authCode) {
-        super(authCode.getMessage()); // Exception 메시지로 설정
         this.authCode = authCode;
     }
 }
