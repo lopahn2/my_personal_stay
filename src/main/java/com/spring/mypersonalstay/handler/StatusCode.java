@@ -6,7 +6,7 @@ import lombok.Getter;
 
 @Getter
 public enum StatusCode {
-    OK(200, "OK", HttpStatus.OK),
+    OK(200, "요청을 성공적으로 처리했습니다.", HttpStatus.OK),
     CREATED(201, "회원가입이 필요합니다.", HttpStatus.CREATED),
     USERNAME_NOT_FOUND(404, "가입된 이메일이 없습니다.", HttpStatus.NOT_FOUND),
     INVALID_PASSWORD (400, "비밀번호가 일치하지 않습니다.", HttpStatus.BAD_REQUEST),
