@@ -12,7 +12,7 @@ import com.spring.mypersonalstay.service.GuestHouseService;
 
 import lombok.RequiredArgsConstructor;
 
-@RestController("/api")
+@RestController
 @RequiredArgsConstructor
 public class GuestHouseController {
 	private final GuestHouseService guestHouseService;
