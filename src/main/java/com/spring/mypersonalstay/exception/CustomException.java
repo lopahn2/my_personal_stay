@@ -15,6 +15,7 @@ public class CustomException extends RuntimeException {
     private StatusCode authCode;
 
     public CustomException(StatusCode authCode) {
+    	super(authCode.getMessage());
         this.authCode = authCode;
     }
 }
