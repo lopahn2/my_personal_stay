@@ -11,28 +11,7 @@ import com.spring.mypersonalstay.service.MemberService;
 import com.spring.mypersonalstay.service.ScoreService;
 
 @SpringBootApplication
-public class Sp00TemaProjectApplication implements CommandLineRunner {
-
-	@Autowired
-	private MemberService memberService;
-	
-	@Autowired
-	private ScoreService scoreService;
-
-	@Override
-	public void run(String... args) {
-		try {
-
-			ReqSignInDto reqSignInDto = ReqSignInDto.builder().email("user1@example.com").password("password123")
-					.build();
-
-			System.out.println(memberService.getToken(reqSignInDto));
-			
-		} catch (CustomException ce) {
-			System.out.println(ce);
-		}
-
-	}
+public class Sp00TemaProjectApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(Sp00TemaProjectApplication.class, args);
