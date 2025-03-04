@@ -24,6 +24,6 @@ public interface GuestHouseRepository extends JpaRepository<GuestHouse, Long> {
 	List<GuestHouse> getAllGuestHousesScore();
 
 	// 특정 게스트 하우스 점수 보여주기
-	@Query(value = "SELECT gh FROM GuestHouse gh JOIN FETCH gh.scores WHERE gh.guestHouseId =: guestHouseId")
+	@Query(value = "SELECT gh FROM GuestHouse gh JOIN FETCH gh.scores WHERE gh.guestHouseId = :guestHouseId")
 	Optional<GuestHouse> getGuestHouseScore(@Param("guestHouseId") Long guestHouseId);
 }
