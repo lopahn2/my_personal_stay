@@ -22,16 +22,16 @@ public class GuestHouseService {
 	private final GuestHouseRepository guestHouseRepository;
 	
 	// 1. 모든 게스트하우스 목록 제공
-	public List<GuestHouseRes> getGuestHouse() throws CustomException{
+	public List<GuestHouseRes> getGuestHouse(){
 		List<GuestHouse> list = guestHouseRepository.getAllGuestHousesScore();
 		if(list == null || list.isEmpty())
-			throw new CustomException(null);
+			throw new CustomException(StatusCode.NOT_FOUND);
 		return list.stream().map(GuestHouseRes::new).collect(Collectors.toList());
 		
 	}
 	// 2. 특정 게스트하우스 목록 제공
-	public GuestHouseRes getGuestHouse(Long id) throws CustomException{
-		GuestHouse guestHouse = guestHouseRepository.getGuestHouseScore(id).orElseThrow(() -> new CustomException(null));
+	public GuestHouseRes getGuestHouse(Long id){
+		GuestHouse guestHouse = guestHouseRepository.getGuestHouseScore(id).orElseThrow(() -> new CustomException(StatusCode.NOT_FOUND));
 
 		return new GuestHouseRes(guestHouse);
 		
