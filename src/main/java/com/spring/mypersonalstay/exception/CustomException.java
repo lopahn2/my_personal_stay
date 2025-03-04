@@ -1,4 +1,4 @@
-package com.spring.mypersonalstay.handler;
+package com.spring.mypersonalstay.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

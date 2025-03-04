@@ -13,7 +13,8 @@ import com.spring.mypersonalstay.dto.ScoreRes;
 import com.spring.mypersonalstay.entity.GuestHouse;
 import com.spring.mypersonalstay.entity.Score;
 import com.spring.mypersonalstay.entity.Status;
-import com.spring.mypersonalstay.exception.ScoreSearchNotException;
+import com.spring.mypersonalstay.exception.CustomException;
+import com.spring.mypersonalstay.exception.StatusCode;
 import com.spring.mypersonalstay.repository.GuestHouseRepository;
 import com.spring.mypersonalstay.repository.ScoreRepository;
 import com.spring.mypersonalstay.repository.StatusRepository;
@@ -45,7 +46,7 @@ public class ScoreService {
 	public ScoreRes findScore(Long id) throws Exception{
 		Score rScore = scoreRepository.findById(id)
 				.orElseThrow(()->
-				new ScoreSearchNotException("해당 점수가 없습니다.")); 
+				new CustomException(StatusCode.NOT_FOUND)); 
 		
 		return new ScoreRes(rScore); 
 	}

@@ -17,7 +17,6 @@ import com.spring.mypersonalstay.dto.guestHouse.UsedGuestHouseResDto;
 import com.spring.mypersonalstay.dto.status.LikeReqDto;
 import com.spring.mypersonalstay.dto.status.ReqStatusUpdateDto;
 import com.spring.mypersonalstay.entity.Status;
-import com.spring.mypersonalstay.exception.ScoreSearchNotException;
 import com.spring.mypersonalstay.service.StatusService;
 
 import lombok.RequiredArgsConstructor;

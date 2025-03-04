@@ -9,8 +9,8 @@ import com.spring.mypersonalstay.dto.tag.TagIdSearchRequestDTO;
 import com.spring.mypersonalstay.dto.tag.TagMFieldSearchRequestDTO;
 import com.spring.mypersonalstay.dto.tag.TagNameSearchRequestDTO;
 import com.spring.mypersonalstay.entity.Tag;
-import com.spring.mypersonalstay.handler.CustomException;
-import com.spring.mypersonalstay.handler.StatusCode;
+import com.spring.mypersonalstay.exception.CustomException;
+import com.spring.mypersonalstay.exception.StatusCode;
 import com.spring.mypersonalstay.repository.TagRepository;
 
 import jakarta.transaction.Transactional;
