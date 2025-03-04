@@ -1,4 +1,4 @@
-package com.spring.mypersonalstay.handler;
+package com.spring.mypersonalstay.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

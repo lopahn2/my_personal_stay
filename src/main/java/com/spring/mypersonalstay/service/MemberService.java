@@ -10,8 +10,8 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.spring.mypersonalstay.dto.member.MemberResDto;
 import com.spring.mypersonalstay.dto.member.ReqSignInDto;
 import com.spring.mypersonalstay.entity.Member;
-import com.spring.mypersonalstay.handler.CustomException;
-import com.spring.mypersonalstay.handler.StatusCode;
+import com.spring.mypersonalstay.exception.CustomException;
+import com.spring.mypersonalstay.exception.StatusCode;
 import com.spring.mypersonalstay.repository.MemberRepository;
 
 import lombok.RequiredArgsConstructor;

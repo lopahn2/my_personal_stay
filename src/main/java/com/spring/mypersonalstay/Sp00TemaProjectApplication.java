@@ -6,7 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.spring.mypersonalstay.dto.member.ReqSignInDto;
-import com.spring.mypersonalstay.handler.CustomException;
+import com.spring.mypersonalstay.exception.CustomException;
 import com.spring.mypersonalstay.service.MemberService;
 import com.spring.mypersonalstay.service.ScoreService;
 

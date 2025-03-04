@@ -1,4 +1,4 @@
-package com.spring.mypersonalstay.handler;
+package com.spring.mypersonalstay.exception;
 
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
