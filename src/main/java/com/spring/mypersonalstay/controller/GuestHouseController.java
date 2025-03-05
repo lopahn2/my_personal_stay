@@ -22,6 +22,7 @@ import lombok.RequiredArgsConstructor;
 public class GuestHouseController {
 	private final GuestHouseService guestHouseService;
 
+	
 	@GetMapping("/guesthouse")
 	@Operation(summary="게스트하우스 전체조회", description="전체 게스트하우스 목록을 조회합니다.")
 	public List<GuestHouseRes> getAllGuestHouse() {
