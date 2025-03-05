@@ -27,7 +27,7 @@ import lombok.RequiredArgsConstructor;
 @CrossOrigin(origins = { "*" }, maxAge = 6000)
 @RestController
 @RequiredArgsConstructor
-@Tag(name = "Status Controller", description = "즐겨찾기 / 예약 / 이전 사용 내역 들의 상태 관리 컨트롤러")
+@Tag(name = "상태", description = "즐겨찾기 / 예약 / 이전 사용 내역 들의 상태 관리 컨트롤러")
 public class StatusController {
 
 	final StatusService statusService;
