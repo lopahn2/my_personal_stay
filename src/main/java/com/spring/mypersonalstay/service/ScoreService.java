@@ -48,7 +48,9 @@ public class ScoreService {
 	public ScoreRes updateScore(ScoreReq scoreReq) {
 		Score rScore = (Score) guestHouseRepository.findById(scoreReq.getGuestHouseId())
 				.orElseThrow(() -> new CustomException(StatusCode.NOT_FOUND)).getScores().stream()
-				.filter(s -> s.getMbti().equals(scoreReq.getMbti()));
+				.filter(s -> s.getMbti().equals(scoreReq.getMbti()))
+				.findFirst()
+		        .orElseThrow(() -> new CustomException(StatusCode.NOT_FOUND));
 
 		GuestHouse guestHouse = guestHouseRepository.findById(scoreReq.getGuestHouseId())
 				.orElseThrow(() -> new CustomException(StatusCode.NOT_FOUND));
@@ -64,7 +66,9 @@ public class ScoreService {
 	public ScoreRes initScore(ScoreReq scoreReq) {
 		Score rScore = (Score) guestHouseRepository.findById(scoreReq.getGuestHouseId())
 				.orElseThrow(() -> new CustomException(StatusCode.NOT_FOUND)).getScores().stream()
-				.filter(s -> s.getMbti().equals(scoreReq.getMbti()));
+				.filter(s -> s.getMbti().equals(scoreReq.getMbti()))
+				.findFirst() // Optional<Score>로 변환
+				.orElseThrow(() -> new CustomException(StatusCode.NOT_FOUND)); // Score가 없으면 예외 발생
 
 		String mbti = guestHouseRepository.findById(scoreReq.getGuestHouseId())
 				.orElseThrow(() -> new CustomException(StatusCode.NOT_FOUND)).getTags();
