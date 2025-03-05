@@ -1,8 +1,9 @@
 package com.spring.mypersonalstay.dto.guestHouse;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
-
+import com.spring.mypersonalstay.dto.ScoreRes;
 import com.spring.mypersonalstay.entity.GuestHouse;
 import com.spring.mypersonalstay.entity.Score;
 
@@ -28,7 +29,7 @@ public class GuestHouseRes {
 	private String tags;
 	private String bgImgUrl;
 	private String regDate; //regDate는 string으로 변환
-	private List<Score> scores; // List로 받아야하나?
+	private List<ScoreRes> scores; // List로 받아야하나?
 	
 	public GuestHouseRes (GuestHouse guestHouse) {
         guestHouseId = guestHouse.getGuestHouseId();
@@ -39,7 +40,9 @@ public class GuestHouseRes {
         tags = guestHouse.getTags();
         bgImgUrl = guestHouse.getBgImgUrl();
         regDate = guestHouse.getRegDate().toString();
-        scores = guestHouse.getScores();// 임시로 score list로 넘김. 이후 dto 형태로 변경
+        scores = guestHouse.getScores().stream()
+                .map(ScoreRes::new)
+                .collect(Collectors.toList());
    }
 	
 //	public GuestHouseRes toGuestHouseRes(GuestHouse guestHouse){
