@@ -15,6 +15,7 @@ import com.spring.mypersonalstay.dto.ScoreReq;
 import com.spring.mypersonalstay.service.ScoreService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 
@@ -27,7 +28,7 @@ public class ScoreController {
 	// Id 로 Score 조회
 	@Operation(summary = "Score Search By Parameter", description = "Score 정보를 Score의 PK ID로 조회합니다.")
 	@GetMapping("/scores/{id}")
-    public ResponseEntity<?> findScore(@PathVariable Long id) throws Exception{
+    public ResponseEntity<?> findScore(@Parameter(required = true, description = "스코어 고유번호") @PathVariable Long id) throws Exception{
         return new ResponseEntity<>(scoreService.findScore(id),HttpStatus.OK);
     }
 		
