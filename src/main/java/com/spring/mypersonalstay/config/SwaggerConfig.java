@@ -20,6 +20,6 @@ public class SwaggerConfig {
 		return new Info()
 				.title("REST API Specifications")
 				.description("My Personal Stay")
-				.version("1.0.0");
+				.version("3.0.0");
 	}
 }

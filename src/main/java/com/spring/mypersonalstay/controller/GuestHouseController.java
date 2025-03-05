@@ -18,6 +18,7 @@ import lombok.RequiredArgsConstructor;
 public class GuestHouseController {
 	private final GuestHouseService guestHouseService;
 
+	
 	@GetMapping("/guesthouse")
 	public List<GuestHouseRes> getAllGuestHouse() {
 		return guestHouseService.getGuestHouse();
