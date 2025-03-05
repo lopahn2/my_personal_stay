@@ -1,5 +1,6 @@
 package com.spring.mypersonalstay.dto.guestHouse;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,7 +29,7 @@ public class GuestHouseRes {
 	private String description;
 	private String tags;
 	private String bgImgUrl;
-	private String regDate; //regDate는 string으로 변환
+	private LocalDateTime regDate; //regDate는 string으로 변환
 	private List<ScoreRes> scores; // List로 받아야하나?
 	
 	public GuestHouseRes (GuestHouse guestHouse) {
@@ -39,7 +40,7 @@ public class GuestHouseRes {
         description = guestHouse.getDescription();
         tags = guestHouse.getTags();
         bgImgUrl = guestHouse.getBgImgUrl();
-        regDate = guestHouse.getRegDate().toString();
+        regDate = guestHouse.getRegDate();
         scores = guestHouse.getScores().stream()
                 .map(ScoreRes::new)
                 .collect(Collectors.toList());
