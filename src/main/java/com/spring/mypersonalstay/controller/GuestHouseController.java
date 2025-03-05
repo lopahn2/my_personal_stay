@@ -2,6 +2,7 @@ package com.spring.mypersonalstay.controller;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 
+@CrossOrigin(origins = { "*" }, maxAge = 6000)
 @Tag(name="게스트하우스", description="게스트하우스 API")
 @RestController
 @RequiredArgsConstructor
