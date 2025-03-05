@@ -16,6 +16,8 @@ public interface TagRepository extends JpaRepository<Tag, Long>{
 	List<Tag> findByTagNameContains(String name);
 	
 	List<Tag> findBymFieldContains(String mField);
+	
+	Optional<Tag> findByTagName(String tagName);
 
 	Optional<Tag> findByTagId(Integer id);
 }
