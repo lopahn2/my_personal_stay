@@ -2,6 +2,8 @@ package com.spring.mypersonalstay.controller;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,23 +29,25 @@ public class GuestHouseController {
 	
 	@GetMapping("/guesthouse")
 	@Operation(summary="게스트하우스 전체조회", description="전체 게스트하우스 목록을 조회합니다.")
-	public List<GuestHouseRes> getAllGuestHouse() {
-		return guestHouseService.getGuestHouse();
+	public ResponseEntity<?> getAllGuestHouse() {
+		return new ResponseEntity<>(guestHouseService.getGuestHouse(),HttpStatus.OK);
 	}
 	
 	@GetMapping("/guesthouse/{id}")
 	@Operation(summary="게스트하우스 조회", description="게스트하우스 하나를 조회합니다.")
-	public GuestHouseRes getGuestHouse(
+	public ResponseEntity<?> getGuestHouse(
 			@Parameter(required=true, description="게스트하우스 고유번호")
 			@PathVariable Long id) {
-		return guestHouseService.getGuestHouse(id);
+		return new ResponseEntity<>(guestHouseService.getGuestHouse(id),HttpStatus.OK);
 	}
 	
-//	@GetMapping("/guesthouse/{mbti_score}")
-//	public List<GuestHouse> findHouseByScore(@PathVariable Integer mbti_score) {
-//		List<GuestHouse> houses = null;
-//		
-//		return houses;
-//	}
+	@GetMapping("/guesthouse/info/{id}")
+	@Operation(summary="게스트하우스 멤버 조회", description="게스트하우스의 예약자 명단을 조회합니다.")
+	public ResponseEntity<?> getGuestHouseUsedMember(
+			@Parameter(required=true, description="게스트하우스 고유번호")
+			@PathVariable Long id) {
+		return new ResponseEntity<>(guestHouseService.getGuestHouseUsedMember(id),HttpStatus.OK);
+	}
+	
 	
 }
