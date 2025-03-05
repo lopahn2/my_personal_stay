@@ -22,6 +22,7 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin(origins = { "*" }, maxAge = 6000)
 @Tag(name = "점수", description = "Score CRU 기능 수행 컨트롤러")
 public class ScoreController {
 	final ScoreService scoreService;
