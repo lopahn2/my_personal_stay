@@ -3,11 +3,17 @@ package com.spring.mypersonalstay.service;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.Random;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import org.apache.commons.text.similarity.CosineSimilarity;
+import org.apache.commons.text.similarity.JaroWinklerSimilarity;
+import org.apache.commons.text.similarity.LevenshteinDistance;
 import org.springframework.stereotype.Service;
 
 import com.spring.mypersonalstay.dto.ScoreReq;
@@ -15,6 +21,7 @@ import com.spring.mypersonalstay.dto.ScoreRes;
 import com.spring.mypersonalstay.entity.GuestHouse;
 import com.spring.mypersonalstay.entity.Score;
 import com.spring.mypersonalstay.entity.Status;
+import com.spring.mypersonalstay.entity.Tag;
 import com.spring.mypersonalstay.exception.CustomException;
 import com.spring.mypersonalstay.exception.StatusCode;
 import com.spring.mypersonalstay.repository.GuestHouseRepository;
@@ -32,29 +39,8 @@ public class ScoreService {
 	private final GuestHouseRepository guestHouseRepository;
 	private final StatusRepository statusRepository;
 	private final TagRepository tagRepository;
-	
-	public List<String> getMbtiWithTag(List<String> tags) {
-		List<String> returnList = new ArrayList<String>();
-		tags.stream().forEach(t -> {
-			returnList.add(tagRepository
-					.findByTagName(t)
-					.get()
-					.getMField());
-		});
-		System.out.println(returnList);
-		return returnList;
-	}
-	
-	public List<String> parseTags(String tags) {
-		return Arrays.asList(tags.split(", "));
-	}
 
-	public Integer getScoreWithTags(List<String> tags, String mbti) {
-		List<String> mbtis = getMbtiWithTag(tags);
-		return (int) mbtis.stream()
-				.filter((t) -> mbti.contains(t))
-				.count();
-	}
+	private static Random random = new Random();
 
 	@Transactional
 	public ScoreRes findScore(Long id) {
@@ -64,36 +50,64 @@ public class ScoreService {
 	}
 
 	@Transactional
-	public ScoreRes updateScore(ScoreReq scoreReq) {
-		Score rScore = (Score) guestHouseRepository.findById(scoreReq.getGuestHouseId())
-				.orElseThrow(() -> new CustomException(StatusCode.NOT_FOUND)).getScores().stream()
-				.filter(s -> s.getMbti().equals(scoreReq.getMbti()))
-				.findFirst()
-		        .orElseThrow(() -> new CustomException(StatusCode.NOT_FOUND));
-
+	public ScoreRes initScore(ScoreReq scoreReq) {
 		GuestHouse guestHouse = guestHouseRepository.findById(scoreReq.getGuestHouseId())
 				.orElseThrow(() -> new CustomException(StatusCode.NOT_FOUND));
-		List<Status> rStatusList = statusRepository.findByGuestHouse(guestHouse);
-		int tmpScore = rStatusList.stream().filter((t) -> t.getMember().getMbti().equals(rScore.getMbti())).toList()
-				.size();
-		rScore.setTotalScore(rScore.getTotalScore() + tmpScore);
 
+		Score rScore = guestHouse.getScores().stream().filter(s -> s.getMbti().equals(scoreReq.getMbti())).findFirst()
+				.orElseThrow(() -> new CustomException(StatusCode.NOT_FOUND));
+
+		String guestHouseTags = guestHouse.getTags();
+		StringBuilder userMbtiTags = new StringBuilder();
+
+		scoreReq.getMbti().chars().forEach(mbti -> {
+			List<String> joinedTag = tagRepository.findBymFieldContains((char) mbti).stream().map(t -> t.getTagName())
+					.collect(Collectors.toList());
+
+			userMbtiTags.append(joinedTag.get(random.nextInt(joinedTag.size())));
+			userMbtiTags.append(", ");
+		});
+
+		Map<CharSequence, Integer> firstVector = getTextVector(guestHouseTags);
+		Map<CharSequence, Integer> secondVector = getTextVector(userMbtiTags.toString());
+
+		CosineSimilarity cosine = new CosineSimilarity();
+		Float cosineScore = cosine.cosineSimilarity(firstVector, secondVector).floatValue();
+
+		rScore.setTotalScore(cosineScore * 100);
 		return new ScoreRes(rScore);
 	}
 
 	@Transactional
-	public ScoreRes initScore(ScoreReq scoreReq) {
-		Score rScore = (Score) guestHouseRepository.findById(scoreReq.getGuestHouseId())
-				.orElseThrow(() -> new CustomException(StatusCode.NOT_FOUND)).getScores().stream()
-				.filter(s -> s.getMbti().equals(scoreReq.getMbti()))
-				.findFirst() // Optional<Score>로 변환
-				.orElseThrow(() -> new CustomException(StatusCode.NOT_FOUND)); // Score가 없으면 예외 발생
+	public ScoreRes updateScore(ScoreReq scoreReq) {
+		GuestHouse guestHouse = guestHouseRepository.findById(scoreReq.getGuestHouseId())
+				.orElseThrow(() -> new CustomException(StatusCode.NOT_FOUND));
+		Score rScore = guestHouse.getScores().stream().filter(s -> s.getMbti().equals(scoreReq.getMbti())).findFirst()
+				.orElseThrow(() -> new CustomException(StatusCode.NOT_FOUND));
 
-		String mbti = guestHouseRepository.findById(scoreReq.getGuestHouseId())
-				.orElseThrow(() -> new CustomException(StatusCode.NOT_FOUND)).getTags();
-		rScore.setTotalScore((float) getScoreWithTags(parseTags(mbti), rScore.getMbti()));
+		int count = statusRepository.findByGuestHouse(guestHouse).stream().filter(st -> st.getIsUsed())
+				.filter(st -> st.getMember().getMbti().equals(scoreReq.getMbti())).collect(Collectors.toList()).size();
+		
 
+		float weight = count >= 10 ? Float.parseFloat("1." + count) : Float.parseFloat("1.0" + count);
+		float tts = rScore.getTotalScore() * weight >= 100.0f ? 100.0f : rScore.getTotalScore() * weight;
+		rScore.setTotalScore(tts);
+		
 		return new ScoreRes(rScore);
+	}
+
+	// 텍스트를 벡터로 변환하는 함수
+	private static Map<CharSequence, Integer> getTextVector(CharSequence text) {
+		Map<CharSequence, Integer> vector = new HashMap<>();
+		String[] words = text.toString().split("[,\\s]+"); // 쉼표와 공백을 기준으로 단어 분할
+
+		for (String word : words) {
+			word = word.trim();
+			if (!word.isEmpty()) {
+				vector.put(word, vector.getOrDefault(word, 0) + 1); // 단어 빈도 계산
+			}
+		}
+		return vector;
 	}
 
 }

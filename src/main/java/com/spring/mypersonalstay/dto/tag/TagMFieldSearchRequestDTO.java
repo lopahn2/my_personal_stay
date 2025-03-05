@@ -4,5 +4,5 @@ import lombok.Data;
 
 @Data
 public class TagMFieldSearchRequestDTO {
-	private String mField;
+	private Character mField;
 }

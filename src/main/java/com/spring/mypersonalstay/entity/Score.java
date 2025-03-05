@@ -22,7 +22,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @Setter
 @Getter
-
 public class Score {
 	@Id
 	@Column(name = "score_id")
@@ -34,6 +33,12 @@ public class Score {
 	
 	@Column(name = "totalScore")
 	private Float totalScore;
+
+	@Override
+	public String toString() {
+		return "Score [scoreId=" + scoreId + ", mbti=" + mbti + ", totalScore=" + totalScore + "]";
+	}
+	
 	
 	
 }

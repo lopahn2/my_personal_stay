@@ -32,7 +32,6 @@ public class GuestHouseService {
 	// 2. 특정 게스트하우스 목록 제공
 	public GuestHouseRes getGuestHouse(Long id){
 		GuestHouse guestHouse = guestHouseRepository.getGuestHouseScore(id).orElseThrow(() -> new CustomException(StatusCode.NOT_FOUND));
-
 		return new GuestHouseRes(guestHouse);
 		
 	}
