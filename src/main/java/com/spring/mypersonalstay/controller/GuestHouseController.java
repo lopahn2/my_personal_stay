@@ -48,6 +48,6 @@ public class GuestHouseController {
 			@PathVariable Long id) {
 		return new ResponseEntity<>(guestHouseService.getGuestHouseUsedMember(id),HttpStatus.OK);
 	}
-	
+	 
 	
 }

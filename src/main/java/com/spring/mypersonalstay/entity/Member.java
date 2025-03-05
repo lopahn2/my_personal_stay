@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.spring.mypersonalstay.dto.member.ResMemberDto;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -64,6 +66,21 @@ public class Member {
 		return "Member [memberId=" + memberId + ", email=" + email + ", password=" + password + ", name=" + name
 				+ ", age=" + age + ", sex=" + sex + ", mbti=" + mbti + ", introduce=" + introduce + ", favorite="
 				+ favorite + ", alcoholLimit=" + alcoholLimit + ", imgUrl=" + imgUrl + ", regDate=" + regDate + "]";
+	}
+	
+	public ResMemberDto toResMemberDto() {
+		return ResMemberDto.builder()
+				.email(this.email)
+				.name(this.name)
+				.age(this.age)
+				.sex(this.sex)
+				.mbti(this.mbti)
+				.introduce(this.introduce)
+				.favorite(this.favorite)
+				.alcoholLimit(this.alcoholLimit)
+				.imgUrl(this.imgUrl)
+				.regDate(this.regDate)
+				.build();
 	}
 
 }

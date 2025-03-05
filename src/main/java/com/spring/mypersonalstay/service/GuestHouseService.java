@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 
 import com.spring.mypersonalstay.dto.guestHouse.GuestHouseRes;
+import com.spring.mypersonalstay.dto.member.ResMemberDto;
 import com.spring.mypersonalstay.entity.GuestHouse;
 import com.spring.mypersonalstay.entity.Member;
 import com.spring.mypersonalstay.entity.Status;
@@ -41,13 +42,13 @@ public class GuestHouseService {
 	}
 	
 	// 게하 등록한 사람 목록
-	public List<Member> getGuestHouseUsedMember(Long id) {
+	public List<ResMemberDto> getGuestHouseUsedMember(Long id) {
 		GuestHouse guestHouse = guestHouseRepository.findById(id).orElseThrow(() -> new CustomException(StatusCode.NOT_FOUND));
 
 		return statusRepository.findByGuestHouse(guestHouse)
 				.stream()
 				.filter(s -> s.getIsBooked())
-				.map(s -> s.getMember())
+				.map(s -> s.getMember().toResMemberDto())
 				.collect(Collectors.toList());
 	}
 
