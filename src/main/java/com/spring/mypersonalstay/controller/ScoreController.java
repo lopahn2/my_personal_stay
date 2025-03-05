@@ -22,7 +22,7 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-@Tag(name = "Score Controller", description = "Score CRU 기능 수행 컨트롤러")
+@Tag(name = "점수", description = "Score CRU 기능 수행 컨트롤러")
 public class ScoreController {
 	final ScoreService scoreService;
 	// Id 로 Score 조회
