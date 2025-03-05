@@ -1,9 +1,11 @@
 package com.spring.mypersonalstay.service;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
@@ -18,6 +20,7 @@ import com.spring.mypersonalstay.exception.StatusCode;
 import com.spring.mypersonalstay.repository.GuestHouseRepository;
 import com.spring.mypersonalstay.repository.ScoreRepository;
 import com.spring.mypersonalstay.repository.StatusRepository;
+import com.spring.mypersonalstay.repository.TagRepository;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -28,13 +31,29 @@ public class ScoreService {
 	private final ScoreRepository scoreRepository;
 	private final GuestHouseRepository guestHouseRepository;
 	private final StatusRepository statusRepository;
-
+	private final TagRepository tagRepository;
+	
+	public List<String> getMbtiWithTag(List<String> tags) {
+		List<String> returnList = new ArrayList<String>();
+		tags.stream().forEach(t -> {
+			returnList.add(tagRepository
+					.findByTagName(t)
+					.get()
+					.getMField());
+		});
+		System.out.println(returnList);
+		return returnList;
+	}
+	
 	public List<String> parseTags(String tags) {
-		return Arrays.asList(tags.split(","));
+		return Arrays.asList(tags.split(", "));
 	}
 
 	public Integer getScoreWithTags(List<String> tags, String mbti) {
-		return tags.stream().filter((t) -> mbti.equals(t)).toList().size();
+		List<String> mbtis = getMbtiWithTag(tags);
+		return (int) mbtis.stream()
+				.filter((t) -> mbti.contains(t))
+				.count();
 	}
 
 	@Transactional
