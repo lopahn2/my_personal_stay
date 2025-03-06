@@ -1,0 +1,23 @@
+use tuna;
+select * from member;
+
+UPDATE member set imgUrl="https://i.pinimg.com/474x/dd/b6/a9/ddb6a90f1d396bfc0f9a86afb947c7f4.jpg" WHERE member_id=1;
+UPDATE member set imgUrl="https://i.pinimg.com/474x/14/e8/18/14e81857f937695736937e67f44fbff1.jpg" WHERE member_id=2;
+UPDATE member set imgUrl="https://i.pinimg.com/474x/6d/91/16/6d9116054a4b1daa5ba0e99732a9ebab.jpg" WHERE member_id=3;
+UPDATE member set imgUrl="https://i.pinimg.com/474x/bd/6a/46/bd6a468720bf5be3e9c117e765813fa6.jpg" WHERE member_id=4;
+UPDATE member set imgUrl="https://i.pinimg.com/474x/51/44/33/51443361d3375959cb2eb914a20a3b1c.jpg" WHERE member_id=5;
+UPDATE member set imgUrl="https://i.pinimg.com/474x/ad/27/9c/ad279c378a34455189d0a26afe7e5ff5.jpg" WHERE member_id=6;
+UPDATE member set imgUrl="https://i.pinimg.com/474x/0f/3b/20/0f3b2044df237debd0ff32d2200d78b1.jpg" WHERE member_id=7;
+UPDATE member set imgUrl="https://i.pinimg.com/474x/6b/6e/9f/6b6e9f329c5f48ef68bf2a67a91a9d90.jpg" WHERE member_id=8;
+UPDATE member set imgUrl="https://i.pinimg.com/474x/db/1b/76/db1b76db7e5fbe8610b61fffbd03e0eb.jpg"WHERE member_id=9;
+UPDATE member set imgUrl="https://i.pinimg.com/474x/17/1c/7e/171c7e58b83d5db767109a52628ec096.jpg"WHERE member_id=10;
+UPDATE member set imgUrl="https://i.pinimg.com/474x/c1/f6/5b/c1f65b5b3e55ef9f614bf738059bada6.jpg"WHERE member_id=11;
+UPDATE member set imgUrl="https://i.pinimg.com/474x/ed/3e/91/ed3e914541d7cf58c868d8a9f7cc3279.jpg"WHERE member_id=12;
+UPDATE member set imgUrl="https://i.pinimg.com/474x/36/04/40/360440ad9a1acc8ce8da466c72ea8bc7.jpg"WHERE member_id=13;
+UPDATE member set imgUrl="https://i.pinimg.com/474x/d8/6d/6d/d86d6d6d1f36e7d0a72a64a120d92c3c.jpg"WHERE member_id=14;
+UPDATE member set imgUrl="https://i.pinimg.com/474x/b5/fb/f6/b5fbf68d2e7705ce4fb3626e095dffb5.jpg"WHERE member_id=15;
+UPDATE member set imgUrl="https://i.pinimg.com/474x/4d/b5/0c/4db50c4a79020fb242fa5c7fee687ce5.jpg"WHERE member_id=16;
+UPDATE member set imgUrl="https://i.pinimg.com/474x/7e/eb/76/7eeb765a1ea16dd83cd760c8c97de804.jpg"WHERE member_id=17;
+UPDATE member set imgUrl="https://i.pinimg.com/474x/09/fe/59/09fe59077d6ff8b3dcf13db82488e272.jpg"WHERE member_id=18;
+UPDATE member set imgUrl="https://i.pinimg.com/474x/23/c0/42/23c0428bb8358065a3879cb91243cb3b.jpg"WHERE member_id=19;
+UPDATE member set imgUrl="https://i.pinimg.com/474x/a3/95/cb/a395cbb72c8461786130013ada6758c0.jpg"WHERE member_id=20;
