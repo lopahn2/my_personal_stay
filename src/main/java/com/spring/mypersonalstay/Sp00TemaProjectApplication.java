@@ -15,8 +15,6 @@ import com.spring.mypersonalstay.service.ScoreService;
 
 @SpringBootApplication
 public class Sp00TemaProjectApplication {
-
-
 	public static void main(String[] args) {
 		SpringApplication.run(Sp00TemaProjectApplication.class, args);
 	}
