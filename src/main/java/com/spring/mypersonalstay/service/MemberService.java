@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.spring.mypersonalstay.dto.member.ReqSignInDto;
+import com.spring.mypersonalstay.dto.member.ResMemberDto;
 import com.spring.mypersonalstay.entity.Member;
 import com.spring.mypersonalstay.exception.CustomException;
 import com.spring.mypersonalstay.exception.StatusCode;
@@ -33,6 +34,11 @@ public class MemberService {
 				.withClaim("favorite", member.getFavorite()).withClaim("alcoholLimit", member.getAlcoholLimit())
 				.withClaim("imgUrl", member.getImgUrl()).withIssuedAt(new Date())
 				.withExpiresAt(new Date(System.currentTimeMillis() + EXPIRED_TIME)).sign(Algorithm.HMAC256(SECRET_KEY));
+	}
+
+	public ResMemberDto getMemberInfo(Long id) {
+		return memberRepository.findById(id).orElseThrow(() -> new CustomException(StatusCode.NOT_FOUND))
+				.toResMemberDto();
 
 	}
 
