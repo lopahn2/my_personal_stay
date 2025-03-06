@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.spring.mypersonalstay.dto.guestHouse.BookedGuestHouseResDto;
 import com.spring.mypersonalstay.dto.guestHouse.LikedGuestHouseResDto;
 import com.spring.mypersonalstay.dto.guestHouse.UsedGuestHouseResDto;
 import com.spring.mypersonalstay.dto.status.LikeReqDto;
@@ -73,6 +74,15 @@ public class StatusController {
 
 		List<UsedGuestHouseResDto> usedGuestHouseResDto = statusService.getUsedGuestHouseList(id);
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(usedGuestHouseResDto);
+	}
+	
+	@GetMapping("/status/booked/{id}")
+	@Operation(summary = "예약중인 게스트하우스 목록 조회", description = "사용자가 예약중인 게스트하우스 전체 목록을 조회합니다.")
+	public ResponseEntity<?> getBookedGuestHouseList(
+			@Parameter(required = true, description = "사용자 고유번호") @PathVariable Long id) throws Exception {
+
+		List<BookedGuestHouseResDto> bookedGuestHouseResDto = statusService.getBookedGuestHouseList(id);
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body(bookedGuestHouseResDto);
 	}
 
 }

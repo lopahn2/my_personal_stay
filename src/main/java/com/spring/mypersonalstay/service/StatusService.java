@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.mypersonalstay.dto.guestHouse.BookedGuestHouseResDto;
 import com.spring.mypersonalstay.dto.guestHouse.LikedGuestHouseResDto;
 import com.spring.mypersonalstay.dto.guestHouse.UsedGuestHouseResDto;
 import com.spring.mypersonalstay.dto.status.BookReqDto;
@@ -111,4 +112,17 @@ public class StatusService {
 		System.out.println(res);
 		return res;
 	}
+	// 예약중인 게하 목록 가져오기
+	public List<BookedGuestHouseResDto> getBookedGuestHouseList(Long memberId)  {
+		Member member = memberRepository.findById(memberId).orElseThrow(() -> new CustomException(StatusCode.NOT_FOUND));
+		List<Status> statusList = statusRepository.findByMemberAndIsBooked(member, true);
+		if (statusList == null || statusList.isEmpty()) {
+			throw new CustomException(StatusCode.NOT_FOUND);
+		}
+		List<BookedGuestHouseResDto> res = statusList.stream().map(o->new BookedGuestHouseResDto(o.getGuestHouse())).collect(Collectors.toList());
+		System.out.println("예약중인 게스트하우스 " + res.size() + "개");
+		System.out.println(res);
+		return res;
+	}
+	
 }
