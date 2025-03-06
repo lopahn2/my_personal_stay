@@ -15,7 +15,7 @@ public class Sp00TemaProjectApplication {
 		SpringApplication.run(Sp00TemaProjectApplication.class, args);
 		
 	}
-	//초기 Score값 초기화
+	//초기 Score값 초기화 (주석 해제후 서버 한번 돌리기)
 //	@Bean
 //    public CommandLineRunner initScores(ScoreService scoreService) {
 //        return args -> {
