@@ -63,7 +63,7 @@ public class StatusService {
 		}
 		Status status = statusList.get(0);
 		System.out.println("[before] book status=" + status);
-		status.setIsLiked(bookReqDto.getFlag()); // true:예약, false:예약취소
+		status.setIsBooked(bookReqDto.getFlag()); // true:예약, false:예약취소
 		System.out.println("[after] book status=" + status);
 		System.out.println("== 예약 처리 완료 ==");
 		return status;
@@ -80,7 +80,7 @@ public class StatusService {
 		}
 		Status status = statusList.get(0);
 		System.out.println("[before] used status=" + status);
-		status.setIsLiked(usedReqDto.getFlag()); // true:이용완료, false:이용완료취소
+		status.setIsUsed(usedReqDto.getFlag()); // true:이용완료, false:이용완료취소
 		System.out.println("[after] used status=" + status);
 		System.out.println("== 이용완료 처리 완료 ==");
 		return status;
